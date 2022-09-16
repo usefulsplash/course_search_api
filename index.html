@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RESTful API Course Search</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="appcode.js"></script>
+  </head>
+  <body>
+    <div class="jumbotron jumbotron-fluid text-center bg-dark text-light">
+      <div class="container">
+        <h1>
+          St. John's University: Division of Computer Science, Mathematics and
+          Science
+        </h1>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 d-flex justify-content-center">
+          <!--form section for queries-->
+          <form onsubmit="return false;" id="queryForm">
+            <label for="codeQuery">
+              Search by course code:<br />
+              <input
+                type="text"
+                id="codeQuery"
+                name="codeQuery"
+                placeholder="ex. CUS1172"
+                value=""
+              /><br />
+              <input
+                id="queryByCode"
+                type="button"
+                class="btn btn-dark"
+                onclick="updateView(this)"
+                value="Query"
+                data-querytype="by_code"
+              /><br />
+            </label>
+            <br />
+            <label for="titleQuery">
+              Search by title:<br />
+              <input
+                type="text"
+                id="titleQuery"
+                name="titleQuery"
+                placeholder="ex. Robotics"
+                value=""
+              /><br />
+              <input
+                id="queryByTitle"
+                type="button"
+                class="btn btn-dark"
+                onclick="updateView(this)"
+                value="Query"
+                data-querytype="by_title"
+              /><br />
+            </label>
+            <br />
+            <label for="instructorQuery">
+              Search by instructor name:<br />
+              <input
+                type="text"
+                id="instructorQuery"
+                name="instructorQuery"
+                placeholder="ex. Bonnie MacKellar"
+                value=""
+              /><br />
+              <input
+                id="queryByInstructor"
+                type="button"
+                class="btn btn-dark"
+                onclick="updateView(this)"
+                value="Query"
+                data-querytype="by_instructor"
+              /><br />
+            </label>
+            <br />
+            <label for="levelQuery">
+              Search by level:<br />
+              <input
+                type="text"
+                id="levelQuery"
+                name="levelQuery"
+                placeholder="ex. undergraduate"
+                value=""
+              /><br />
+              <input
+                id="queryByLevel"
+                type="button"
+                class="btn btn-dark"
+                onclick="updateView(this)"
+                value="Query"
+                data-querytype="by_level"
+              /><br />
+            </label>
+            <br />
+            <label for="combinedQuery">
+              Search by instructor name and level:<br />
+              <input
+                type="text"
+                id="combinedNameQuery"
+                name="combinedNameQuery"
+                placeholder="ex. Yadav Nikhil"
+                value=""
+              />
+              <input
+                type="text"
+                id="combinedLevelQuery"
+                name="combinedLevelQuery"
+                placeholder="ex. graduate"
+                value=""
+              /><br />
+              <input
+                id="Combined"
+                type="button"
+                class="btn btn-dark"
+                onclick="updateView(this)"
+                value="Query"
+                data-querytype="combined"
+              /><br />
+            </label>
+            <br />
+          </form>
+        </div>
+        <div class="col-sm-6 d-flex justify-content-left">
+          <!--search results show up here-->
+          <div id="results"></div>
+        </div>
+      </div>
+    </div>
+    <script id="show_results_view" type="text/x-handlebars-template">
+      <ul class="list-group list-group-flush">
+        {{#each courses}}
+          <li class="list-group-item">Course Code:
+            {{course_code}}
+            | Course Level:
+            {{course_level}}
+            | Title:
+            {{title}}
+            | Instructor:
+            {{instructor}}</li>
+        {{/each}}
+      </ul>
+    </script>
+  </body>
+</html>
